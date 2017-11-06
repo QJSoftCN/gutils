@@ -20,15 +20,24 @@ func convertFile(inputFile, outputFile string, fmt interface{}) bool {
 	return true
 }
 
+//xlsFilePath,outXlsxPath must Absolute path
+//convert xls to xlsx
 func ToXlsx(xlsFilePath, outXlsxPath string) bool {
-
 	isSuc := convertFile(xlsFilePath, outXlsxPath, xlsx)
-
 	return isSuc
 }
 
-func ToHtml(xlsFilePath, outHtmlPath string) bool {
+//xlsFilePath,outXlsxPath must Absolute path
+//convert xlsx to xlsx
+func ToXls(xlsFilePath, outXlsxPath string)bool{
+	isSuc := convertFile(xlsFilePath, outXlsxPath, xls)
+	return isSuc
+}
 
+//xlsFilePath,outXlsxPath must Absolute path
+//convert xls or xlsx to html
+//Equivalent to excel soft "Save As"
+func ToHtml(xlsFilePath, outHtmlPath string) bool {
 	isSuc := convertFile(xlsFilePath, outHtmlPath, html)
 	return isSuc
 }
