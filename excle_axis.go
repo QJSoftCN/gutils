@@ -182,3 +182,42 @@ func CalcAbsAxis(ri, ci int) string {
 
 	return EG + colKey + EG + rowKey
 }
+
+//excel sheet axis computer
+type SheetAxiser struct {
+	span map[string]bool
+}
+
+func (this *SheetAxiser) Span(ri, ci, rs, cs int) {
+	for r := ri; r <= ri+rs; r++ {
+		for c := ci; c <= ci+cs; c++ {
+			if r == ri && c == ci {
+				continue
+			} else {
+				//非起始位置
+				key := strconv.Itoa(r) + "_" + strconv.Itoa(c)
+				this.span[key] = true
+			}
+
+		}
+	}
+}
+
+func (this *SheetAxiser) IsSpan(ri, ci int) bool {
+	key := strconv.Itoa(ri) + "_" + strconv.Itoa(ci)
+	if v, ok := this.span[key]; ok {
+		return v
+	}
+	return false
+}
+
+//ri is row index
+//ci is col index
+//isAbs if true return $
+func (this *SheetAxiser) Axis(ri, ci int, isAbs bool) string {
+	if isAbs {
+		return CalcAbsAxis(ri, ci)
+	} else {
+		return CalcAxis(ri, ci)
+	}
+}
