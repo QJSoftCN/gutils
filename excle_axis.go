@@ -183,6 +183,13 @@ func CalcAbsAxis(ri, ci int) string {
 	return EG + colKey + EG + rowKey
 }
 
+func NewSheetAxiser() *SheetAxiser {
+	sa := new(SheetAxiser)
+	spanMap := make(map[string]bool)
+	sa.span = spanMap
+	return sa
+}
+
 //excel sheet axis computer
 type SheetAxiser struct {
 	span map[string]bool
