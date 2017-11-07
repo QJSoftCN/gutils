@@ -1,4 +1,4 @@
 # gutils
 golang utils
 
-cotains excel time file ...
+cotains conf excel time file ... utils
