@@ -4,6 +4,7 @@ import (
 	"os"
 	"log"
 	"io"
+	"path/filepath"
 )
 
 func PathExists(path string) bool {
@@ -29,14 +30,15 @@ func Dir(dir string) string {
 	return dir
 }
 
-//copy dir or file
-func CopyFile(source, dest string) bool {
-	if source == "" || dest == "" {
+//copy file to dest dir
+//destFileName if "" use sourceFileName
+func CopyFile(sourceFile, destDir, destFileName string) bool {
+	if sourceFile == "" || destDir == "" {
 		log.Println("source or dest is null")
 		return false
 	}
 
-	source_open, err := os.Open(source)
+	source_open, err := os.Open(sourceFile)
 
 	if err != nil {
 		log.Println(err.Error())
@@ -44,14 +46,23 @@ func CopyFile(source, dest string) bool {
 	}
 	defer source_open.Close()
 
-	dest_open, err := os.OpenFile(dest, os.O_CREATE|os.O_WRONLY, 644)
+	//valid dest dir or create
+	dir := Dir(destDir)
+
+	if len(destFileName) == 0 {
+		destFileName = filepath.Base(sourceFile)
+	}
+
+	destFile := filepath.Join(dir, destFileName)
+
+	dest_open, err := os.OpenFile(destFile, os.O_CREATE|os.O_WRONLY, 644)
 	if err != nil {
 		log.Println(err.Error())
 		return false
 	}
-	//养成好习惯。操作文件时候记得添加 defer 关闭文件资源代码
+
 	defer dest_open.Close()
-	//进行数据拷贝
+
 	_, copy_err := io.Copy(dest_open, source_open)
 	if copy_err != nil {
 		log.Println(copy_err.Error())
@@ -60,5 +71,3 @@ func CopyFile(source, dest string) bool {
 		return true
 	}
 }
-
-
