@@ -5,6 +5,7 @@ import (
 	"log"
 	"io"
 	"path/filepath"
+	"strings"
 )
 
 func PathExists(path string) bool {
@@ -28,6 +29,28 @@ func Dir(dir string) string {
 		log.Println(err)
 	}
 	return dir
+}
+
+func GetFileExt(file string) string {
+	ext := filepath.Ext(file)
+	if len(ext) > 0 {
+		return ext[1:]
+	} else {
+		return ext
+	}
+}
+
+func GetFileName(file string) string {
+	base := filepath.Base(file)
+
+	lastDotIndex := strings.LastIndex(base, Dot)
+
+	if lastDotIndex != -1 {
+		return base[0:lastDotIndex]
+	} else {
+		return base
+	}
+
 }
 
 //copy file to dest dir
