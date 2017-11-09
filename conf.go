@@ -3,7 +3,6 @@ package gutils
 import (
 	"io/ioutil"
 	"log"
-	"path"
 	"strings"
 	"encoding/json"
 )
@@ -17,24 +16,6 @@ const (
 	conf_locale = "locale"
 	top_conf    = "top"
 )
-
-func init() {
-	all = make(map[string](map[string]interface{}))
-
-	files, err := ioutil.ReadDir(dir_conf)
-	if err != nil {
-		log.Println(err)
-	}
-	for index, file := range files {
-		log.Println("read No.", index+1, " confige file name:", file.Name())
-		switch strings.ToLower(path.Ext(file.Name())) {
-		case json_file:
-			readConfByJson(file.Name())
-		default:
-			readConfByJson(file.Name())
-		}
-	}
-}
 
 func readConfByJson(fileName string) {
 	bs, err := ioutil.ReadFile(dir_conf + "/" + fileName)
