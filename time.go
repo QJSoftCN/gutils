@@ -10,11 +10,11 @@ const (
 	TF_ToSecondForName = "20060102150405"
 )
 
-func FormatToSecond(time time.Time)string{
+func FormatToSecond(time time.Time) string {
 	return time.Format(TF_ToSecond)
 }
 
-func FormatToSecondForFileName(time time.Time)string{
+func FormatToSecondForFileName(time time.Time) string {
 	return time.Format(TF_ToSecondForName)
 }
 
@@ -28,9 +28,7 @@ func ToGoTimeFmt(f string) string {
 	return f
 }
 
-
-
-
-
-
-
+func Parse(t, fmt string) (time.Time, error) {
+	gtf := ToGoTimeFmt(fmt)
+	return time.Parse(t, gtf)
+}
