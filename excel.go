@@ -3,6 +3,7 @@ package gutils
 import (
 	"github.com/aswjh/excel"
 	"time"
+	"runtime"
 )
 
 const (
@@ -12,11 +13,13 @@ const (
 )
 
 func convertFile(inputFile, outputFile string, fmt interface{}) bool {
+	old:=runtime.GOMAXPROCS(1)
 	options := excel.Option{"Visible": false, "DisplayAlerts": true}
 	xl, _ := excel.Open(inputFile, options)
 	defer xl.Quit()
+	time.Sleep(3000000000)
 	xl.SaveAs(outputFile, fmt)
-	time.Sleep(time.Second)
+	runtime.GOMAXPROCS(old)
 	return true
 }
 
