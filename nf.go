@@ -5,6 +5,7 @@ import (
 	"strconv"
 )
 
+
 func FormatFloat(f float64, valFmt string) string {
 	_, err := strconv.Atoi(valFmt)
 	if err == nil {
