@@ -10,6 +10,11 @@ const (
 	TF_ToSecondForName = "20060102150405"
 )
 
+func Format(time time.Time, fmt string) string {
+	gfmt := ToGoTimeFmt(fmt)
+	return time.Format(gfmt)
+}
+
 func FormatToSecond(time time.Time) string {
 	return time.Format(TF_ToSecond)
 }
