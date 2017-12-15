@@ -35,5 +35,5 @@ func ToGoTimeFmt(f string) string {
 
 func Parse(t, fmt string) (time.Time, error) {
 	gtf := ToGoTimeFmt(fmt)
-	return time.Parse(t, gtf)
+	return time.Parse(gtf,t)
 }
