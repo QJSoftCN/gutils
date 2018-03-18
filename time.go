@@ -6,8 +6,11 @@ import (
 )
 
 const (
-	TF_ToSecond        = "2006-01-02 15:04:05"
-	TF_ToSecondForName = "20060102150405"
+	tF_ToSecond        = "2006-01-02 15:04:05"
+	tF_ToSecondForName = "20060102150405"
+
+	TF_Sec="yyyy-MM-dd HH:mm:ss"
+	TF_Day="yyyy-MM-dd"
 )
 
 func Format(time time.Time, fmt string) string {
@@ -16,11 +19,11 @@ func Format(time time.Time, fmt string) string {
 }
 
 func FormatToSecond(time time.Time) string {
-	return time.Format(TF_ToSecond)
+	return time.Format(tF_ToSecond)
 }
 
 func FormatToSecondForFileName(time time.Time) string {
-	return time.Format(TF_ToSecondForName)
+	return time.Format(tF_ToSecondForName)
 }
 
 func ToGoTimeFmt(f string) string {
